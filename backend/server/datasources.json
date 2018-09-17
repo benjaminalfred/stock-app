@@ -1,0 +1,16 @@
+{
+  "db": {
+    "name": "db",
+    "connector": "memory"
+  },
+  "mongo": {
+    "host": "",
+    "port": 0,
+    "url": "mongodb://ben:1password@ds028559.mlab.com:28559/stock-api",
+    "database": "stock-api",
+    "password": "1password",
+    "name": "mongo",
+    "user": "ben",
+    "connector": "mongodb"
+  }
+}
