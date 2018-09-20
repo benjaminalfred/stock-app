@@ -1,0 +1,16 @@
+<h1>Loging Page</h1>
+
+<form clrForm>
+    
+<input clrInput placeholder="email" name="input" [(ngModel)]="user.email" />
+<br><br>
+<input clrInput placeholder="password" name="input" [(ngModel)]="user.password" />
+
+</form>
+<br>
+<button (click)="onLogin()">Login</button>
+<br>
+<br>
+
+
+<button class="btn btn-link" (click)=toRegister() >Need an Account?</button>
