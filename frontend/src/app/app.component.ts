@@ -18,19 +18,15 @@ export class AppComponent implements OnInit {
   line_type; */
 
   
-  constructor(private _look: StocksService) {}
+  constructor(private _stocks: StocksService) {}
   
     ngOnInit(){
-   
-    // this._look.getPhoneDetails()
-    //   .subscribe( (data:any) => {
-    //     this.is_valid = data.is_valid;
-    //     this.phone_number = data.phone_number;
-    //     this.carrier = data.carrier;
-    //     this.line_type = data.line_type
-    //   console.log(data)
-    //   console.log(this.is_valid)
-    //   })
+     
+    this._stocks.getStock()
+       .subscribe( (data:any) => {
+      
+       console.log(data)
+       })
 
   } 
 }
