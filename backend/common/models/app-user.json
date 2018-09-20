@@ -7,7 +7,7 @@
     "validateUpsert": true
   },
   "properties": {
-    "fistName": {
+    "firstName": {
       "type": "string",
       "required": true
     },
@@ -25,7 +25,13 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "favorites": {
+      "type": "hasMany",
+      "model": "favorite",
+      "foreignKey": "userId"
+    }
+  },
   "acls": [],
   "methods": {}
 }
