@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { StocksService } from '../stocks.service';
 
 @Component({
   selector: 'app-day',
@@ -6,9 +7,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./day.component.css']
 })
 export class DayComponent implements OnInit {
-
-  constructor() { }
-
+  stockSymbol = ""
+  constructor(private _stocks: StocksService) { }
+  
+  stockSearch() {
+        this._stocks.getStock(this.stockSymbol)
+       .subscribe( (data:any) => {
+       //this."5. adjusted close" = data.close;
+       console.log(data)
+       })
+  }
+  
   ngOnInit() {
   }
   
@@ -73,3 +82,6 @@ export class DayComponent implements OnInit {
 
 
 }
+
+
+

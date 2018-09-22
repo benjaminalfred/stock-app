@@ -10,23 +10,9 @@ import { StocksService } from './stocks.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  //  title = 'alpha-vantage';
-  
-/*  is_valid;
-  phone_number;
-  carrier;
-  line_type; */
 
   
-  constructor(private _stocks: StocksService) {}
+  constructor() {}
   
-    ngOnInit(){
-     
-    this._stocks.getStock()
-       .subscribe( (data:any) => {
-      
-       console.log(data)
-       })
-
-  } 
+  ngOnInit(){}
 }
