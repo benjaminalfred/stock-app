@@ -14,9 +14,23 @@ export class DayComponent implements OnInit {
         this._stocks.getStock(this.stockSymbol)
        .subscribe( (data:any) => {
        //this."5. adjusted close" = data.close;
-       console.log(data)
+       console.log(data["Monthly Adjusted Time Series"])
+       for(let i in data){
+         for(let j in data[i]){
+           console.log(data[i][j]["4. close"])
+         }
+       }
        })
   }
+  
+//var string1 = "";
+//var object1 = {a: 1, b: 2, c: 3};
+//for (var i in object1) {
+//  string1 = string1 + object1[i];
+//}
+//console.log(string1);
+// expected output: "123"
+  
   
   ngOnInit() {
   }
