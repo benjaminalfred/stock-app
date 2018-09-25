@@ -10,26 +10,22 @@ export class DayComponent implements OnInit {
   stockSymbol = ""
   constructor(private _stocks: StocksService) { }
   
+  stockPrice: any = []
+  stockDate: any = []
+  
   stockSearch() {
         this._stocks.getStock(this.stockSymbol)
        .subscribe( (data:any) => {
-       //this."5. adjusted close" = data.close;
-       console.log(data["Monthly Adjusted Time Series"])
-       for(let i in data){
-         for(let j in data[i]){
-           console.log(data[i][j]["4. close"])
-         }
+       for(let date in data["Monthly Adjusted Time Series"]){
+         this.stockDate.push(date)
+           let str = data["Monthly Adjusted Time Series"][date]["4. close"]
+           let st1 = Math.round(str)
+           this.stockPrice.push(str)
        }
+       console.log(this.stockDate)
+       console.log(this.stockPrice)
        })
   }
-  
-//var string1 = "";
-//var object1 = {a: 1, b: 2, c: 3};
-//for (var i in object1) {
-//  string1 = string1 + object1[i];
-//}
-//console.log(string1);
-// expected output: "123"
   
   
   ngOnInit() {
@@ -37,9 +33,9 @@ export class DayComponent implements OnInit {
   
  // lineChart
   public lineChartData:Array<any> = [
-    {data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A'},
-    {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'},
-    {data: [18, 48, 77, 9, 100, 27, 40], label: 'Series C'}
+    {data: [650, 590, 800, 810, 560, 550, 400], label: 'Series A'},
+    {data: [280, 480, 400, 190, 860, 270, 900], label: 'Series B'},
+    {data: [180, 480, 770, 90, 1000, 270, 400], label: 'Series C'}
   ];
   public lineChartLabels:Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
   public lineChartOptions:any = {
