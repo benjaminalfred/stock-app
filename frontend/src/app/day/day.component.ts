@@ -22,17 +22,15 @@ export class DayComponent implements OnInit {
         let rndPrice = Math.round(wholePrice)
         this.stockPrice.push(rndPrice)
       }
-      console.log(this.stockDate)
-      console.log(this.stockPrice)
-
+      console.log(this.stockDate);
+      console.log(this.stockPrice);
       this.lineChartData = [{ data: this.stockPrice }]
-      this.lineChartLabels = this.stockDate;
+      this.lineChartLabels.push(...this.stockDate)
     })
   }
 
   ngOnInit() {
-    this.lineChartData = [{ data: [], label:[]}]
-    //this.lineChartLabels = []
+    this.lineChartData = [{ data: []}]
   }
 
   // lineChart
@@ -41,6 +39,10 @@ export class DayComponent implements OnInit {
   public lineChartOptions: any = {
     responsive: true
   }
+  
+  public lineChartLegend: boolean = false
+  public lineChartType: string = "line"
+  
   /*public lineChartColors:Array<any> = [
     { // grey
       backgroundColor: 'rgba(148,159,177,0.2)',
@@ -67,10 +69,9 @@ export class DayComponent implements OnInit {
       pointHoverBorderColor: 'rgba(148,159,177,0.8)'
     }
   ]*/
-  public lineChartLegend: boolean = false
-  public lineChartType: string = "line"
 
-  public randomize(): void {
+
+  /*public randomize(): void {
     let _lineChartData: Array<any> = new Array(this.lineChartData.length)
     for (let i = 0; i < this.lineChartData.length; i++) {
       _lineChartData[i] = {
@@ -82,14 +83,14 @@ export class DayComponent implements OnInit {
       }
     }
     this.lineChartData = _lineChartData
-  }
+  }*/
 
   // events
-  public chartClicked(e: any): void {
+  /*public chartClicked(e: any): void {
     console.log(e)
-  }
+  }*/
 
-  public chartHovered(e: any): void {
-    console.log(e)
-  }
+ // public chartHovered(e: any): void {
+ //  console.log(e)
+ // }
 }
