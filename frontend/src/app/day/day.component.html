@@ -1,4 +1,7 @@
-<input [(ngModel)]="stockSymbol" (keyup.enter)="stockSearch()" >
+<input [(ngModel)]="stockSymbol" (keyup.enter)="stockSearch()">
+<br>
+<br>
+<button (click)="stockSearch()">CLICK</button>
 
 <div class="row">
   <div class="col-md-6">
@@ -23,6 +26,5 @@
         <td *ngFor="let label of lineChartLabels; let j=index">{{d && d.data[j]}}</td>
       </tr>
     </table>
-    <button (click)="randomize()">CLICK</button>
   </div>
 </div>

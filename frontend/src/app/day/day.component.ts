@@ -1,47 +1,46 @@
-import { Component, OnInit } from '@angular/core';
-import { StocksService } from '../stocks.service';
+import { Component, OnInit } from "@angular/core";
+import { StocksService } from "../stocks.service";
 
 @Component({
-  selector: 'app-day',
-  templateUrl: './day.component.html',
-  styleUrls: ['./day.component.css']
+  selector: "app-day",
+  templateUrl: "./day.component.html",
+  styleUrls: ["./day.component.css"]
 })
 export class DayComponent implements OnInit {
-  stockSymbol = ""
-  constructor(private _stocks: StocksService) { }
-  
-  stockPrice: any = []
-  stockDate: any = []
-  
+  stockSymbol = "";
+  constructor(private _stocks: StocksService) {}
+
+  stockPrice: any = [];
+  stockDate: any = [];
+
   stockSearch() {
-        this._stocks.getStock(this.stockSymbol)
-       .subscribe( (data:any) => {
-       for(let date in data["Monthly Adjusted Time Series"]){
-         this.stockDate.push(date)
-           let str = data["Monthly Adjusted Time Series"][date]["4. close"]
-           let st1 = Math.round(str)
-           this.stockPrice.push(str)
-       }
-       console.log(this.stockDate)
-       console.log(this.stockPrice)
-       })
+    this._stocks.getStock(this.stockSymbol).subscribe((data: any) => {
+      for (let date in data["Monthly Adjusted Time Series"]) {
+        this.stockDate.push(date);
+        let wholePrice = data["Monthly Adjusted Time Series"][date]["4. close"];
+        let rndPrice = Math.round(wholePrice);
+        this.stockPrice.push(rndPrice);
+      }
+      console.log(this.stockDate);
+      console.log(this.stockPrice);
+
+      this.lineChartData = [{ data: this.stockPrice }];
+      //this.lineChartLabels = [{ data: this.stockDate }];
+    });
   }
-  
-  
+
   ngOnInit() {
+    this.lineChartData = [{ data: [] }];
+    this.lineChartLabels = [{ data: [] }];
   }
-  
- // lineChart
-  public lineChartData:Array<any> = [
-    {data: [650, 590, 800, 810, 560, 550, 400], label: 'Series A'},
-    {data: [280, 480, 400, 190, 860, 270, 900], label: 'Series B'},
-    {data: [180, 480, 770, 90, 1000, 270, 400], label: 'Series C'}
-  ];
-  public lineChartLabels:Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-  public lineChartOptions:any = {
+
+  // lineChart
+  public lineChartData: Array<any> = [];
+  public lineChartLabels: Array<any> = [];
+  public lineChartOptions: any = {
     responsive: true
   };
-  public lineChartColors:Array<any> = [
+  /*public lineChartColors:Array<any> = [
     { // grey
       backgroundColor: 'rgba(148,159,177,0.2)',
       borderColor: 'rgba(148,159,177,1)',
@@ -66,32 +65,30 @@ export class DayComponent implements OnInit {
       pointHoverBackgroundColor: '#fff',
       pointHoverBorderColor: 'rgba(148,159,177,0.8)'
     }
-  ];
-  public lineChartLegend:boolean = true;
-  public lineChartType:string = 'line';
- 
-  public randomize():void {
-    let _lineChartData:Array<any> = new Array(this.lineChartData.length);
+  ];*/
+  public lineChartLegend: boolean = false;
+  public lineChartType: string = "line";
+
+  public randomize(): void {
+    let _lineChartData: Array<any> = new Array(this.lineChartData.length);
     for (let i = 0; i < this.lineChartData.length; i++) {
-      _lineChartData[i] = {data: new Array(this.lineChartData[i].data.length), label: this.lineChartData[i].label};
+      _lineChartData[i] = {
+        data: new Array(this.lineChartData[i].data.length),
+        label: this.lineChartData[i].label
+      };
       for (let j = 0; j < this.lineChartData[i].data.length; j++) {
-        _lineChartData[i].data[j] = Math.floor((Math.random() * 100) + 1);
+        _lineChartData[i].data[j] = Math.floor(Math.random() * 100 + 1);
       }
     }
     this.lineChartData = _lineChartData;
   }
- 
+
   // events
-  public chartClicked(e:any):void {
-    console.log(e);
-  }
- 
-  public chartHovered(e:any):void {
+  public chartClicked(e: any): void {
     console.log(e);
   }
 
-
+  public chartHovered(e: any): void {
+    console.log(e);
+  }
 }
-
-
-
